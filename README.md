@@ -1,83 +1,44 @@
 # Notificador Service (Go)
 
-Este é um microsserviço de notificações de alta performance escrito em Go, responsável por enviar mensagens através de diversas plataformas (atualmente, Telegram).
+Este é um microsserviço de notificações de alta performance escrito em Go, responsável por enviar mensagens através do Telegram.
 
 Este serviço faz parte de uma arquitetura maior de monitoramento de preços.
 
 ## Tecnologias Utilizadas
 
-- **Linguagem:** [Go](https://go.dev/)
+- **Linguagem:** Go
 - **Roteamento HTTP:** Pacote `net/http` da biblioteca padrão.
-- **Variáveis de Ambiente:** [godotenv](https://github.com/joho/godotenv)
+- **Variáveis de Ambiente:** godotenv
 
-## Configuração do Ambiente
+## Como Executar (Com Docker Compose)
 
-Siga os passos abaixo para rodar este projeto localmente.
+Este serviço não foi projetado para ser executado de forma isolada. Ele é orquestrado pelo Docker Compose a partir do repositório principal da plataforma.
 
-### Pré-requisitos
-
-- **Go:** Versão 1.18 ou superior.
-- **Credenciais do Telegram:**
-    1. Um **Token de Bot** (obtido através do `@BotFather`).
-    2. O **Chat ID** do destinatário da mensagem.
-
-### Passos
-
-1.  **Clone o repositório:**
+1.  **Clone o repositório principal:**
     ```bash
-    git clone https://github.com/MaVitor/notificador-service-go.git
-    cd notificador-service-go
-    git checkout develop # Se certifique de estar na branch develop
+    git clone https://github.com/MaVitor/price-alert-platform.git
+    cd price-alert-platform
     ```
 
-2.  **Crie o arquivo de ambiente:**
-    Crie um arquivo chamado `.env` na raiz do projeto e adicione seu token do Telegram:
-    ```
-    TELEGRAM_BOT_TOKEN=seu_token_aqui
-    ```
-
-3.  **Instale as dependências:**
-    O Go Modules cuidará disso automaticamente ao rodar o projeto.
-
-4.  **Execute o projeto:**
+2.  **Suba o ambiente:**
+    O `docker-compose.yml` no diretório raiz cuidará de construir a imagem deste serviço e iniciá-lo junto com os outros.
     ```bash
-    go run main.go
+    docker-compose up
     ```
-    O servidor estará disponível em `http://127.0.0.1:8081`.
+    A API estará disponível na porta `8080` do seu host.
 
 ## API Endpoints
 
-A seguir estão os endpoints disponíveis na API.
-
-### Health Check
-
-Verifica a saúde e a disponibilidade do serviço.
-
--   **Método:** `GET`
--   **Path:** `/health`
--   **Resposta de Sucesso (200 OK):**
-    ```json
-    {
-      "status": "ok"
-    }
-    ```
-
 ### Enviar Notificação
 
-Envia uma mensagem de texto para um chat específico do Telegram.
-
--   **Método:** `POST`
--   **Path:** `/notificacao`
--   **Corpo da Requisição (JSON):**
-    ```json
-    {
-      "chat_id": "ID_DO_CHAT_DE_DESTINO",
-      "mensagem": "Sua *mensagem* aqui. O `ParseMode` Markdown está ativado."
-    }
-    ```
--   **Resposta de Sucesso (200 OK):**
-    ```json
-    {
-      "status": "notificacao enviada"
-    }
-    ```
+- **Método:** `POST`
+- **Path:** `/notificacao`
+- **Corpo da Requisição (JSON):**
+  ```json
+  {
+    "chat_id": "ID_DO_CHAT_DE_DESTINO",
+    "mensagem": "Sua mensagem aqui."
+  }
+Resposta de Sucesso (200 OK):{
+  "status": "notificacao enviada"
+}
