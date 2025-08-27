@@ -105,13 +105,14 @@ func sendTelegramNotification(chatID, message string) error {
 func main() {
 	// Carrega as variáveis de ambiente do arquivo .env
 	if err := godotenv.Load(); err != nil {
-		log.Println("Aviso: arquivo .env não encontrado.")
+		log.Println("Aviso: arquivo .env não encontrado. Usando variáveis de ambiente do sistema.")
 	}
 
 	http.HandleFunc("/health", healthCheckHandler)
 	http.HandleFunc("/notificacao", notificacaoHandler)
 
-	port := ":8081"
+	// CORREÇÃO: Alterado para a porta 8080 para corresponder ao Dockerfile
+	port := ":8080"
 	log.Printf("Servidor iniciado na porta %s", port)
 
 	if err := http.ListenAndServe(port, nil); err != nil {
