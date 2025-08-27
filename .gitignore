@@ -1,0 +1,10 @@
+# Binários compilados
+notificador-service-go
+notificador-service-go.exe
+
+# Arquivos de IDEs
+.vscode/
+.idea/
+
+# Variaveis de ambiente
+.env
