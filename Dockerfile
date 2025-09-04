@@ -25,7 +25,7 @@ WORKDIR /app
 COPY --from=builder /app/notificador-service .
 
 # Copia o .env pra dentro do container
-COPY .env .
+# COPY .env .
 
 # Exponhe a porta que a aplicação vai usar
 EXPOSE 8080
