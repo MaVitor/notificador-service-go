@@ -6,9 +6,9 @@ Este serviço faz parte de uma arquitetura maior de monitoramento de preços.
 
 ## Tecnologias Utilizadas
 
-- **Linguagem:** Go
-- **Roteamento HTTP:** Pacote `net/http` da biblioteca padrão.
-- **Variáveis de Ambiente:** godotenv
+-   **Linguagem:** Go
+-   **Roteamento HTTP:** Pacote `net/http` da biblioteca padrão.
+-   **Variáveis de Ambiente:** `godotenv`
 
 ## Como Executar (Com Docker Compose)
 
@@ -16,7 +16,7 @@ Este serviço não foi projetado para ser executado de forma isolada. Ele é orq
 
 1.  **Clone o repositório principal:**
     ```bash
-    git clone https://github.com/MaVitor/price-alert-platform.git
+    git clone [https://github.com/MaVitor/price-alert-platform.git](https://github.com/MaVitor/price-alert-platform.git)
     cd price-alert-platform
     ```
 
@@ -29,16 +29,31 @@ Este serviço não foi projetado para ser executado de forma isolada. Ele é orq
 
 ## API Endpoints
 
+### Health Check
+
+-   **Método:** `GET`
+-   **Path:** `/health`
+-   **Resposta de Sucesso (200 OK):**
+    ```json
+    {
+      "status": "ok"
+    }
+    ```
+
 ### Enviar Notificação
 
-- **Método:** `POST`
-- **Path:** `/notificacao`
-- **Corpo da Requisição (JSON):**
-  ```json
-  {
-    "chat_id": "ID_DO_CHAT_DE_DESTINO",
-    "mensagem": "Sua mensagem aqui."
-  }
-Resposta de Sucesso (200 OK):{
-  "status": "notificacao enviada"
-}
+-   **Método:** `POST`
+-   **Path:** `/notificacao`
+-   **Corpo da Requisição (JSON):**
+    ```json
+    {
+      "chat_id": "ID_DO_CHAT_DE_DESTINO_NO_TELEGRAM",
+      "mensagem": "Sua mensagem aqui."
+    }
+    ```
+-   **Resposta de Sucesso (200 OK):**
+    ```json
+    {
+      "status": "notificacao enviada"
+    }
+    ```
